@@ -9,6 +9,7 @@ public class TimeTrackUsers {
 	private String id;
 	private String firstName;
 	private String lastName;
+	private String team;
 
 	/**
 	 * @return the id
@@ -53,5 +54,20 @@ public class TimeTrackUsers {
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	/**
+	 * @return the team
+	 */
+	public String getTeam() {
+		return team;
+	}
+
+	/**
+	 * @param team
+	 *            the team to set
+	 */
+	public void setTeam(String team) {
+		this.team = team;
 	}
 }
