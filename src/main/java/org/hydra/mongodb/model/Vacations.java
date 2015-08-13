@@ -18,6 +18,7 @@ public class Vacations {
 	private String comments;
 	private String status;
 	
+	public Vacations(){};
 	public String getAppliedBY() {
 		return appliedBY;
 	}

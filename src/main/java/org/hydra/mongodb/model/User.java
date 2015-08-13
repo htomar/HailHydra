@@ -11,6 +11,7 @@ public class User {
     private String password;
     private String emailID;
     private String Designation;
+    public User(){};
 	public String getLogonID() {
 		return logonID;
 	}
