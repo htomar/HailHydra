@@ -10,6 +10,7 @@ public class Releases {
 	private String id; 
 	private List<Calendar> rdates;
 	private String rDescriptions;
+	public Releases(){};
 	public List<Calendar> getRdates() {
 		return rdates;
 	}

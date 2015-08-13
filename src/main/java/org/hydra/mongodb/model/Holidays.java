@@ -10,6 +10,8 @@ public class Holidays {
 	private String id; 
 	private List<Calendar> hdates;
 	private String hDescriptions;
+	
+	public Holidays(){}; 
 	public List<Calendar> getHdates() {
 		return hdates;
 	}
