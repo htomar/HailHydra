@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class TimeTrackUsers {
 	@Id
 	private String id;
+	private String userId;
 	private String firstName;
 	private String lastName;
 	private String team;
@@ -69,5 +70,20 @@ public class TimeTrackUsers {
 	 */
 	public void setTeam(String team) {
 		this.team = team;
+	}
+
+	/**
+	 * @return the userId
+	 */
+	public String getUserId() {
+		return userId;
+	}
+
+	/**
+	 * @param userId
+	 *            the userId to set
+	 */
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }
