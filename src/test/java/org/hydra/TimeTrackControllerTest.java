@@ -20,6 +20,7 @@ public class TimeTrackControllerTest {
 	@Before
 	public void setUp() {
 		timeTrackController = new TimeTrackController();
+
 	}
 
 	@Test
