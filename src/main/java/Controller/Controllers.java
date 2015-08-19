@@ -16,7 +16,7 @@ import ServiceImpl.UserDetailsImpl;
 import dao.EmployeePojo;
 
 @Controller
-@RequestMapping("/")
+
 public class Controllers {
 
 	@Autowired
