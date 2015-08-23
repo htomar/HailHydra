@@ -8,5 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface TimeTrackUsersRepository extends
 		PagingAndSortingRepository<TimeTrackUsers, String> {
 
-	List<TimeTrackUsers> findByFirstNameLike(String firstName);
+	List<TimeTrackUsers> findByEmailLike(String email);
+
+	TimeTrackUsers findByEmail(String email);
 }

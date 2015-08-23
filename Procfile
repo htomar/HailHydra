@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/HailHydra-0.0.1-SNAPSHOT.jar
+web: java -agentlib:TakipiAgent -Dserver.port=$PORT -jar target/HailHydra-0.0.1-SNAPSHOT.jar
