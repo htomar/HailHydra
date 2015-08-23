@@ -62,7 +62,7 @@ public class IndexController implements ErrorController {
 			user.setDesignation(request.getParameter("designation"));
 //			signUpServiceImpl.signUp(user);
 			userRepository.save(user);
-			User user1 = userRepository.findByEmailID("a@g.com");
+			User user1 = userRepository.findByEmailID(user.getEmailID());
 			System.out.println(user1.getLogonID());
 			return "HomePage";
 		}
@@ -82,7 +82,7 @@ public class IndexController implements ErrorController {
 				if(user.getPassword().equals(password))
 					check = "Loggedin";
 				else
-					check = "PleaseCheckYourPassrod";
+					check = "PleaseCheckYourPassword";
 			}
 			
 			else

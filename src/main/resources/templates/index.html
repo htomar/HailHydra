@@ -1,17 +1,124 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Welcome to HYDRA!</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-</head>
+<style>
+
+input[type=submit] {
+	text-decoration:none;
+	width:200px;
+	text-align:center;
+	background-color:#664C00;
+	color:#fff;
+	border:1px solid #FFCB00;
+	font-size:20px;
+	cursor:pointer;
+	border-radius:5px
+}
+
+header {
+ width:1324px;
+    background-color:black;
+    color:white;
+    padding:5px;	 
+}
+
+nav {
+    line-height:30px;
+    background-color:#476B6B;
+    height:475px;
+    width:800px;
+    float:left;
+    padding:5px;
+	border:1px solid #ccc;
+	text-align:center;
+	
+}
+section {
+    width:500px;
+    float:left;
+	height:466px;
+    padding:10px;
+	background-color:#47B224;
+	text-align:center;	
+}
+footer {
+width:1324px;
+    background-color:black;
+    color:white;
+    clear:both;
+	height:60px;
+    text-align:center;
+    padding:5px;	 	 
+}
+#form1 {
+text-align:right;
+}
+.myClass {
+    some-src-property: url("https://github.com/htomar/HailHydra/blob/master/calendars.png")};
+</style>
+
 <body>
-<p>HYDRA!</p>
-check
-<form method="GET" action="/openSignUp">
-	<input type="submit" value="SignUp"/>
+
+<header>
+	<table>
+		<tr>
+			<td style="width:200px">
+				<img id="logo" style="align-text:left" src="D:\Innovation as culture\HailHydra\src\main\resources\templates\Logo.png"/>
+			</td>
+			<td style="width:500px">
+				<h2 style="align-text:right">Vacation Tracker</h2>
+			</td>
+			<td style="width:600px">
+				<form action="/login" id="form1" method="get" name="form2"> 
+					Email ID: <input id="name" name="emailid" placeholder="Example@sapient.com" type="text" style="margin-right:20px" />
+					Password: <input type="password" name="password" placeholder="********" />
+					<a href="#" style="margin-left:50px;margin-right:50px">Forget Password?</a>
+					<input type="submit" value="signin"></input>
+				</form>
+			</td>
+		</tr>
+	</table>
+</header>
+
+<nav>
+<img class="myClass" />
+</nav>
+
+<section>
+<form action="/signup" id="form1" method="get" name="form2" style="text-align:center"> 
+<h2 style="color:white;">Register Here</h2>
+<table align="center">
+<tr>
+<td>OracleId </td>
+<td><input id="name" name="oid" placeholder="First Name" type="text" style="width:250px"/></td>
+</tr>
+<tr>
+<td>LogonId </td>
+<td><input id="name" name="LogonId" placeholder="Last Name" type="text" style="width:250px"/></td>
+</tr>
+<tr>
+<td>Email ID: </td>
+<td><input id="name" name="emailid" placeholder="Example@sapient.com" type="text" style="width:250px"/></td>
+</tr>
+<tr>
+<td>designation </td>
+<td><input id="name" name="designation" type="text" style="width:250px"/></td>
+</tr>
+<tr>
+<td>Password: </td>
+<td><input type="password" name="password" placeholder="********" style="width:250px"/></td>
+</tr>
+<tr>
+<td>Confirm Password: </td>
+<td><input type="password" name="confirmpassword" placeholder="********" style="width:250px"/></td>
+</tr>
+</table>
+
+<input type="submit" name="login" value="SignUp" style="width:200px;height:35px;border:1px;margin-left:50px" />
 </form>
-<form method="GET" action="/loginPage">
-	<input type="submit" value="Login"/>
-</form>
+</section>
+
+<footer>
+<h2>Copyright © hailhydra.com</h2>
+</footer>
 </body>
 </html>
