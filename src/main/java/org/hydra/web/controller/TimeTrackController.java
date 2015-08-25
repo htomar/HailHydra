@@ -12,7 +12,7 @@ public class TimeTrackController {
 	private TimeTrackUsersRepository timeTrackUsersRepository;
 
 	public @RequestMapping("/innovation") String getInnovationPage() {
-		return "timetracking/innovation";
+		return "innovation";
 	}
 
 	public @RequestMapping("/temp") String temp(
