@@ -1,0 +1,25 @@
+#language
+language: java
+
+# JDK version
+jdk: oraclejdk8
+
+#mongo db services
+services: mongodb
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "eeLuI/LGQ6iI56xXa9aJc4vetp/w6VXL4X9KJMfi2Be5FtDkJJdrwEhIdZFkqmQOZ+SPO0AfY8RvwtyjI4zbnln3KMnMlrStQ5cQUC5GKdMHJDc6wm39ePzlpOLHIUIUcvb7kTrl5WwKXef/raVwwO3uYL+PMTHARagdnNWiBeWjrq8O6m5HjnRv0VwqJkEOeprhyD+bFAYFAuEeJzjml3tdoQ3b/zEv1Wr8f9w8w76luI/UNBUM57CQogqLV+RkRBI1MIbF8pt1NC7P2eFZeyxr74j0z/hjWuF0Wz2hVCWZtH3JxvlkQOobsiQ2FPB1dBhE4i5Z9MJ1cXWr+roJ4erXRTXwpjUO9woncQcEvp3H5oCYcwgYVZ7Aa5GWMOC10wk07wn88oOlxKwMdRit8V4xsuvxZCbQKjEgVXl53x9pmRIggyy7hWFOlWJfWCQ5//suSZ+FLbGv2HvWZaSB4AETqKwZVnCPNFM5DVr25WuBK5/iRpehzuouZlyoCFlVgNZ/IPRAP1jaLETJaT5aFRxB18CJheFKnrhipUg+dbTnzM/XdrfO1raM0V2+6vewdqEbC1ZcFWNvL9MAwGDgNDqhsb8d4L7hVFUlgJ7+YdFfpcAHIQtU1ikBJqBA4sExG20dPPJjk5KX3OC3HG5K6JTnY8KUaUurlBGRJOaPXVA="
+
+addons:
+  coverity_scan:
+    project:
+      name: "htomar/HailHydra"
+      description: "Build submitted via Travis CI"
+    notification_email: htomar@sapient.com
+    build_command_prepend: "mvn clean"
+    build_command:   "mvn -DskipTests=true compile"
+    branch_pattern: coverity_scan
+     
