@@ -65,7 +65,7 @@
 				<version>3.2.0</version>
 				<configuration>
 					<jacocoReports>
-						<jacocoReport>${project.reporting.outputDirectory}/jacoco-unit/jacoco.xml</jacocoReport>
+						<jacocoReport>${basedir}/target/coverage-reports/jacoco-unit/jacoco.xml</jacocoReport>
 					</jacocoReports>
 				</configuration>
 			</plugin>
@@ -77,7 +77,7 @@
 					<skip>${maven.test.skip}</skip>
 					<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
 					<dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
-					<outputDirectory>${project.reporting.outputDirectory}/jacoco-unit</outputDirectory>
+					<outputDirectory>${basedir}/target/coverage-reports/jacoco-unit</outputDirectory>
 					<output>file</output>
 					<append>true</append>
 				</configuration>
