@@ -23,4 +23,4 @@ deploy:
     app: hailhydra
     on: master
 after_success:
-  - mvn clean jacoco:report coveralls:report
+  - mvn clean cobertura:cobertura coveralls:report
