@@ -1,25 +1,26 @@
-#language
 language: java
-
-# JDK version
 jdk: oraclejdk8
-
-#mongo db services
 services: mongodb
-
 env:
   global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "eeLuI/LGQ6iI56xXa9aJc4vetp/w6VXL4X9KJMfi2Be5FtDkJJdrwEhIdZFkqmQOZ+SPO0AfY8RvwtyjI4zbnln3KMnMlrStQ5cQUC5GKdMHJDc6wm39ePzlpOLHIUIUcvb7kTrl5WwKXef/raVwwO3uYL+PMTHARagdnNWiBeWjrq8O6m5HjnRv0VwqJkEOeprhyD+bFAYFAuEeJzjml3tdoQ3b/zEv1Wr8f9w8w76luI/UNBUM57CQogqLV+RkRBI1MIbF8pt1NC7P2eFZeyxr74j0z/hjWuF0Wz2hVCWZtH3JxvlkQOobsiQ2FPB1dBhE4i5Z9MJ1cXWr+roJ4erXRTXwpjUO9woncQcEvp3H5oCYcwgYVZ7Aa5GWMOC10wk07wn88oOlxKwMdRit8V4xsuvxZCbQKjEgVXl53x9pmRIggyy7hWFOlWJfWCQ5//suSZ+FLbGv2HvWZaSB4AETqKwZVnCPNFM5DVr25WuBK5/iRpehzuouZlyoCFlVgNZ/IPRAP1jaLETJaT5aFRxB18CJheFKnrhipUg+dbTnzM/XdrfO1raM0V2+6vewdqEbC1ZcFWNvL9MAwGDgNDqhsb8d4L7hVFUlgJ7+YdFfpcAHIQtU1ikBJqBA4sExG20dPPJjk5KX3OC3HG5K6JTnY8KUaUurlBGRJOaPXVA="
-
+  - secure: eeLuI/LGQ6iI56xXa9aJc4vetp/w6VXL4X9KJMfi2Be5FtDkJJdrwEhIdZFkqmQOZ+SPO0AfY8RvwtyjI4zbnln3KMnMlrStQ5cQUC5GKdMHJDc6wm39ePzlpOLHIUIUcvb7kTrl5WwKXef/raVwwO3uYL+PMTHARagdnNWiBeWjrq8O6m5HjnRv0VwqJkEOeprhyD+bFAYFAuEeJzjml3tdoQ3b/zEv1Wr8f9w8w76luI/UNBUM57CQogqLV+RkRBI1MIbF8pt1NC7P2eFZeyxr74j0z/hjWuF0Wz2hVCWZtH3JxvlkQOobsiQ2FPB1dBhE4i5Z9MJ1cXWr+roJ4erXRTXwpjUO9woncQcEvp3H5oCYcwgYVZ7Aa5GWMOC10wk07wn88oOlxKwMdRit8V4xsuvxZCbQKjEgVXl53x9pmRIggyy7hWFOlWJfWCQ5//suSZ+FLbGv2HvWZaSB4AETqKwZVnCPNFM5DVr25WuBK5/iRpehzuouZlyoCFlVgNZ/IPRAP1jaLETJaT5aFRxB18CJheFKnrhipUg+dbTnzM/XdrfO1raM0V2+6vewdqEbC1ZcFWNvL9MAwGDgNDqhsb8d4L7hVFUlgJ7+YdFfpcAHIQtU1ikBJqBA4sExG20dPPJjk5KX3OC3HG5K6JTnY8KUaUurlBGRJOaPXVA=
 addons:
   coverity_scan:
     project:
-      name: "htomar/HailHydra"
-      description: "Build submitted via Travis CI"
-    notification_email: htomar@sapient.com
-    build_command_prepend: "mvn clean"
-    build_command:   "mvn -DskipTests=true compile"
+      name: htomar/HailHydra
+      description: Build submitted via Travis CI
+    notification_email:
+      secure: yjsXG5/Y9pKPRunqecCf8ACdIDmGV1yabCTCsxLLgWSU/yl8772f0Pz88+Zf3XldtnhiEW05gBtKsLMMkzXma7e2eNR+CeJ19O692NZvl13vv0GEG8HlFo44Md3DLAlPsR/L9juFWBGrOJo1/2yX5HxG377jjE5ax87fjnI3aZBHDDX/riZFIePW08u4c1Py2S4MkV96iQlu64qMkjWABqMlK2MMw5DuM6xzFboYUFb8nVvTGqhT/0bmHGEu7QSRMe/ksAfG4mLnb1/wVAoyrFXUUYgyWclE1kpY+a45C9lfk5PTMPMERfk9blYFW2E94kyDTrDIGgbIUXJ2aZ0btRKWSQPBO5thYhoUGvkxtOKWbKedZUiME8JtwGV0eQzgVF5J8HG+pou+Kq4Keg0bp69JLzjHpIQ5EnOSHbWl9DuP6B1PR1g2Q/IeYFqiqW4/jx9pftE9x2OtRDl/IOcwuKJnr8T/9fLOcLJ1VSFq/EDWB4Yne34lYXVqv5JZxDdKUEFyPPZatsNtvU3iS4XiIE8p0G/Cx70nhU//v5G8E3K2SROVuGSyc84a5HQttX7s601KsVB+MLLUyHICX9cy1Eg9Q/jX503yE5N7l/qHsh8641L0aWrEsdAa54IQuIvmYXq3lpJ7ZjlL7R9ux5TlXYRfbFKUj5h3hPU/8Eng+nM=
+    build_command_prepend: mvn clean
+    build_command: mvn -DskipTests=true compile
     branch_pattern: coverity_scan
-     
+notifications:
+  slack:
+    secure: GOj4tioOVJHKjmAWhtHy8MxrWfNUT5Tt903o4BuSO3AbhZWmpe7nJlRaz8xhI70LS7Hqql0I+tyGUo3IrN9uhoNy9DCFGGnoP9TyFzJh9wLdzngRxnZ+ysnGP2joOc7vDKMIEw2N3I4AHAUI62oPJAN7h9Pt3SD8T9304eJ33SivdjrsE+mTq46YpxncNI64/8LVr3F7ZYXWOL+neu6g+WQNdFqwMmBp/+uWEbdzGw1T9wUvMFnoGC8wedJYi3BAP9UYrG2qUfWaqT6noOWtb15qnZvYW8gnEtlGO/b93vzNE/Y14pnp2/kz1FVb40viTX/tTyAMqp1oxRyIOooBmR1ZGdSe6zBNCq9ma1wAItzufoAHsD9TFKllpDCAqqenZd7rURJxsW/pxrVVNrwZJP7Fs4Q1InJukyDCl5WYdwE5Q3WPsiTCK7Ffdv5nVvKaph05t5vqDbt4lrz/9ayOfdp0fJh7Wi1SAWCRD8D3AmipGAd0Xhpq8BeRb6q6uxF5kie/juPOVsfBh+euq6cnTC3zf8l0Gd5GIQD1zNGRXS+mN8od4YI+G4Azjy+akal4rujQ4JcjsBbZNQDSWP95f7llxFI2wbKczzNgQVM5qJgkwWnJFW7kH/IjY9C7FUZqh0HEO5NVeALqqIhkhTkT3KS2LrvTkRyol7URdN9NNlo=
+deploy:
+  api_key:
+    secure: TsCPPfm0v3oT6z476OjgibLGrIL6g8S2V80YpeB5eFZxDGUvgnSwICrLiIrkD4/Z//nbGp1IsH1Is8DclxnkbmgsRw/CD2S3rvUJX1PavFsUNaWLJ38E3/bUl2L3R0g3LZtT5BXP69nr+p4Do0MhDzP37vHo2O5vcDI1alx2UazmyzWFsVuZBY8PHimWFxhD8vDragV6AYhEUR5dzOgeNGRrjzlTcgNBtMCEtiAzy5sTUtzRuAETgtEDSImX4g8cO/ICtL4cwBv6ryOJanYfc1E8BrOb4qZf8/Kph+JvEoI82dB9VkIHJyy30GnD0Xt5Fu1OIOTJTYIQ4Y3ndPI2OjbfnQgKeyPibw7rsHi+ciWlWci20CJbcnvOPj3/QD4G/3VPk+cpbZ4PzZdTpc/DVn8Zd4ic8/QOlMP5V8r+02kT3As9CPhdJafqNneKY+j0hL4nvFBBNID8Ux+YQxGnQXaI3rL1WgF6h2K86XoUAcV9Cwd7etWR9dPUOnwesCnNqmqgUtP85c/KNBH13rCpHQCW47aZKNWNsX2C4mvOucsbt7SY6e46NOFKatHBeXipktVz+27rxq253Bml1jRsFsN6HTEGK3bETKeaIQhqBOLmRMiLjQ967HyecAgexCvrjuBX9K+XqBudJ/6lwey8rz0VuZdzeD+EZd6TXdkmS4E=
+    app: hailhydra
+    on: master
+after_success:
+  - mvn clean jacoco:report coveralls:report
