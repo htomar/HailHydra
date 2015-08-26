@@ -1,3 +1,4 @@
+sudo: required
 language: java
 jdk: oraclejdk8
 services: mongodb
@@ -24,4 +25,4 @@ deploy:
   app: hailhydra
   on: master
 after_success:
-  - mvn clean jacoco:report coveralls:report
+  - mvn -X clean jacoco:report coveralls:report
