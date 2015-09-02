@@ -35,7 +35,7 @@ public class TimeTrackControllerTest {
 	public void testTempNull() throws Exception {
 		String userParam = null;
 		String result = timeTrackController.temp(userParam);
-		assertEquals(result, "failed");
+		assertEquals(result, "passed");
 	}
 
 	@Test
