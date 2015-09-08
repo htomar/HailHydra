@@ -6,11 +6,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hydra.mongodb.model.User;
 import org.hydra.mongodb.repositories.UserRepository;
+import org.hydra.web.service.SignUpServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+
 
 @Controller
 public class IndexController implements ErrorController {
@@ -18,7 +23,9 @@ public class IndexController implements ErrorController {
 	private static final String PATH = "/error";
 	@Autowired
     private UserRepository userRepository;
-
+	@Autowired
+	SignUpServiceImpl signUpserviceImpl;
+	
     public void setRepository(UserRepository userRepository) {
 			this.userRepository = userRepository;
 		}
@@ -52,15 +59,20 @@ public class IndexController implements ErrorController {
 	  
 	  @RequestMapping("/signup" )
 		public String createSignUP(ModelMap model,ServletRequest servletRequest) {
-			HttpServletRequest request = (HttpServletRequest)servletRequest;
+		  	HttpServletRequest request = (HttpServletRequest)servletRequest;
 			org.hydra.mongodb.model.User user = new org.hydra.mongodb.model.User();
-			
+//			Errors result = new Errors();
 			user.setOracleID(request.getParameter("oid"));
 			user.setLogonID(request.getParameter("LogonId"));
 			user.setEmailID(request.getParameter("emailid"));
 			user.setPassword(request.getParameter("password"));
 			user.setDesignation(request.getParameter("designation"));
+			user.setConfirmPassword(request.getParameter("confirmpassword"));
+//			signUpserviceImpl.validate(user,result);
 //			signUpServiceImpl.signUp(user);
+//			 if (result.hasErrors()) {    
+//				   return "error";  
+//				  }  
 			userRepository.save(user);
 			User user1 = userRepository.findByEmailID(user.getEmailID());
 			System.out.println(user1.getLogonID());
@@ -72,6 +84,7 @@ public class IndexController implements ErrorController {
 			HttpServletRequest request = (HttpServletRequest)servletRequest;
 			String username = request.getParameter("emailid");
 			String password=request.getParameter("password");
+			
 //			String username = "a1@g.com";
 //			String password = "check";
 			String check;
