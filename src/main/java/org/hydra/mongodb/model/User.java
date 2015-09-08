@@ -11,12 +11,20 @@ public class User {
     private String password;
     private String emailID;
     private String Designation;
+    private String confirmPassword;
     public User(){};
 	public String getLogonID() {
 		return logonID;
 	}
 	public void setLogonID(String logonID) {
 		this.logonID = logonID;
+	}
+	
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 	public String getOracleID() {
 		return oracleID;
