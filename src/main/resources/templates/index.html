@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
 <head>
 
 <title>Form Validation</title>
@@ -43,16 +43,6 @@
          }
       }
    //
-</script>
-<script>
-var app = angular.module('myApp', []);
-app.controller('validateCtrl', function($scope) {
-    $scope.LogonId =  'John Doe';
-	$scope.oid = '109895';
-    $scope.email = 'john.doe@gmail.com';
-	$scope.designation = 'Associate';
-	$scope.password = 'abcd'
-});
 </script>
 
 </head>
@@ -199,59 +189,42 @@ text-align:right;
 </div>
 
 <div class="fifty-fifty right">
-<form ng-app="myApp"  ng-controller="validateCtrl" action="/signup" id="form1" method="get" name="myForm" style="text-align:center" onsubmit="return(validate());" novalidate> 
+<form action="/signup" id="form1" method="get" name="myForm" style="text-align:center" onsubmit="return(validate());"> 
 <h2 style="color:white;">Register Here</h2>
  
 <div class="label-field">
 <label for="oid">OracleId: </label>
-<input id="oid" name="oid" placeholder="Oracle ID" type=number pattern=”[0-9]* ng-model="oid" required/>
-  <span style="color:red" ng-show="myForm.oid.$dirty && myForm.oid.$invalid">
-  <span ng-show="myForm.oid.$error.required">Oracle ID is required.</span>
-  <span ng-show="myForm.oid.$error.oid">Invalid Oracle ID address.</span>
-  </span>
+<input id="oid" name="oid" placeholder="Oracle ID" type="text"/>
 </div>
 
 <div class="label-field">
 <label for="LogonId">LogonId: </label>
-<input id="LogonId" name="LogonId" placeholder="Logon ID" type="text" ng-model="LogonId" required/>
-  <span style="color:red" ng-show="myForm.LogonId.$dirty && myForm.LogonId.$invalid">
-  <span ng-show="myForm.LogonId.$error.required">LogonId is required.</span>
-  </span>
+<input id="LogonId" name="LogonId" placeholder="Logon ID" type="text"/>
 </div>
 
 <div class="label-field">
-<label for="emailid">Email Id: </label>
-<input id="emailid" name="email" placeholder="Example@sapient.com" type="email" ng-model="email" required/>
- <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
-<span ng-show="myForm.email.$error.required">Email is required.</span>
-<span ng-show="myForm.email.$error.email">Invalid email address.</span>
-</span>
+<label for="emailid">Email ID: </label>
+<input id="emailid" name="emailid" placeholder="Example@sapient.com" type="text"/>
 </div>
 
 <div class="label-field">
 <label for="designation">Designation: </label>
-<input id="designation" name="designation" type="text" ng-model="designation" required/>
-  <span style="color:red" ng-show="myForm.designation.$dirty && myForm.designation.$invalid">
-  <span ng-show="myForm.designation.$error.required">designation is required.</span>
-  </span>
+<input id="designation" name="designation" type="text"/>
 </div>
 
 <div class="label-field">
 <label for="Password">Password: </label>
-<input type="password" name="password" placeholder="********" ng-model="password" required/>
- <span style="color:red" ng-show="myForm.password.$dirty && myForm.password.$invalid">
-  <span ng-show="myForm.password.$error.required">password is required.</span>
-  </span>
+<input type="password" name="password" placeholder="********" />
 </div>
 
-<input class="btn-submit" type="submit" name="login" value="SignUp"  ng-disabled="myForm.oid.$dirty && myForm.oid.$invalid || myForm.LogonId.$dirty && myForm.LogonId.$invalid || myForm.email.$dirty && myForm.email.$invalid || myForm.designation.$dirty && myForm.designation.$invalid || myForm.password.$dirty && myForm.password.$invalid" />
+<input class="btn-submit" type="submit" name="login" value="SignUp" />
 </form>
 
 </div>
 </section>
 
 <footer class="full-width">
-<h2>Copyright © hailhydra.com</h2>
+<h2>Copyright Â© hailhydra.com</h2>
 </footer>
 </body>
 </html>
