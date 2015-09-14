@@ -6,13 +6,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hydra.mongodb.model.User;
 import org.hydra.mongodb.repositories.UserRepository;
-import org.hydra.web.service.SignUpServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -23,8 +20,7 @@ public class IndexController implements ErrorController {
 	private static final String PATH = "/error";
 	@Autowired
     private UserRepository userRepository;
-	@Autowired
-	SignUpServiceImpl signUpserviceImpl;
+
 	
     public void setRepository(UserRepository userRepository) {
 			this.userRepository = userRepository;
