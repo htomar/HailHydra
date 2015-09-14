@@ -4,15 +4,14 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.hydra.mongodb.repositories.UserRepository;
+import org.hydra.web.service.ChangeStatusImpl;
+import org.hydra.web.service.LoginImpl;
+import org.hydra.web.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ServiceImpl.ChangeStatusImpl;
-import ServiceImpl.LoginImpl;
-import ServiceImpl.SignUpServiceImpl;
-import ServiceImpl.UserDetailsImpl;
 import dao.EmployeePojo;
 
 @Controller
@@ -21,9 +20,6 @@ public class Controllers {
 
 	@Autowired
 	private LoginImpl loginImpl;
-	
-	@Autowired
-	private SignUpServiceImpl signUpServiceImpl;
 	
 	@Autowired
 	private UserDetailsImpl userDetailsImpl;
