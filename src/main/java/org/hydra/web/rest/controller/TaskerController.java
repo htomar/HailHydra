@@ -1,6 +1,7 @@
 package org.hydra.web.rest.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -22,18 +23,19 @@ public class TaskerController {
 		List<Task> tasks = taskRepository.findByUserId("sunil");
 		MyTasksJson myTasksJson = new MyTasksJson();
 		myTasksJson.addActiveTasks(tasks);
-		System.out.println(myTasksJson);
 		return myTasksJson;
 	}
 
-	public @RequestMapping("/getSubTasks") SubTaskJson getSubTasks(
+	public @RequestMapping("/getSubTasks") HashMap<String, SubTaskJson> getSubTasks(
 			@RequestParam(value = "taskId", required = true) String taskId) {
 		Task task = taskRepository.findById(new ObjectId(taskId));
-		SubTaskJson subTaskJson = new SubTaskJson();
+		HashMap<String, SubTaskJson> subTasks = new HashMap<String, SubTaskJson>();
 		if (null != task) {
+			SubTaskJson subTaskJson = new SubTaskJson();
 			subTaskJson.addTasks(task.getSubTasks());
+			subTasks.put(taskId, subTaskJson);
 		}
-		return subTaskJson;
+		return subTasks;
 	}
 
 	public @RequestMapping("/createTask") void createTask() {

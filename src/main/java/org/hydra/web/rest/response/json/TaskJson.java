@@ -21,7 +21,7 @@ public class TaskJson {
 			this.progress = task.getProgress();
 			this.subTasks = "";
 			if (null != task.getSubTasks() && !task.getSubTasks().isEmpty()) {
-				this.subTasks = "/tasker/getSubTasks?taskId="
+				this.subTasks = "/getSubTasks?taskId="
 						+ task.getId().toHexString();
 			}
 		}
