@@ -1,32 +1,45 @@
 package org.hydra.web.rest.response.json;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.hydra.tasker.db.beans.Task;
 
 public class MyTasksJson {
-	private HashMap<String, List<TaskJson>> tasks;
+	private TaskJson myt;
+	private TaskJson arch;
 
 	public MyTasksJson() {
-		tasks = new HashMap<String, List<TaskJson>>();
+		myt = new TaskJson();
+		arch = new TaskJson();
 	}
 
-	public void setActiveTasks(List<Task> taskList) {
-		if (null != taskList) {
-			List<TaskJson> activeTasks = new ArrayList<TaskJson>();
-			for (Task task : taskList) {
-				activeTasks.add(new TaskJson(task));
-			}
-			tasks.put("activeTasks", activeTasks);
-		}
+	public void addActiveTask(Task task) {
+		myt.addTask(task);
+	}
+
+	public void addActiveTasks(List<Task> activeTasks) {
+		myt.addTasks(activeTasks);
+	}
+
+	public void addArchiveTask(Task task) {
+		arch.addTask(task);
+	}
+
+	public void addArchiveTasks(List<Task> activeTasks) {
+		arch.addTasks(activeTasks);
 	}
 
 	/**
-	 * @return the tasks
+	 * @return the myt
 	 */
-	public HashMap<String, List<TaskJson>> getTasks() {
-		return tasks;
+	public TaskJson getMyt() {
+		return myt;
+	}
+
+	/**
+	 * @return the arch
+	 */
+	public TaskJson getArch() {
+		return arch;
 	}
 }

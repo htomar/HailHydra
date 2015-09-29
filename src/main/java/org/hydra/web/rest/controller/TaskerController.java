@@ -6,8 +6,8 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import org.hydra.tasker.db.beans.Task;
 import org.hydra.tasker.db.repository.TaskRepository;
-import org.hydra.web.rest.response.json.MySubTaskJson;
 import org.hydra.web.rest.response.json.MyTasksJson;
+import org.hydra.web.rest.response.json.SubTaskJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,16 +21,19 @@ public class TaskerController {
 	public @RequestMapping("/getTasks") MyTasksJson getTasks() {
 		List<Task> tasks = taskRepository.findByUserId("sunil");
 		MyTasksJson myTasksJson = new MyTasksJson();
-		myTasksJson.setActiveTasks(tasks);
+		myTasksJson.addActiveTasks(tasks);
+		System.out.println(myTasksJson);
 		return myTasksJson;
 	}
 
-	public @RequestMapping("/getSubTasks") MySubTaskJson getSubTasks(
+	public @RequestMapping("/getSubTasks") SubTaskJson getSubTasks(
 			@RequestParam(value = "taskId", required = true) String taskId) {
 		Task task = taskRepository.findById(new ObjectId(taskId));
-		MySubTaskJson myTasksJson = new MySubTaskJson();
-		myTasksJson.setSubTasks(task.getSubTasks());
-		return myTasksJson;
+		SubTaskJson subTaskJson = new SubTaskJson();
+		if (null != task) {
+			subTaskJson.addTasks(task.getSubTasks());
+		}
+		return subTaskJson;
 	}
 
 	public @RequestMapping("/createTask") void createTask() {
