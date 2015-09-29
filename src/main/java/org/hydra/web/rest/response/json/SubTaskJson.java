@@ -12,21 +12,21 @@ public class SubTaskJson {
 		private String desc;
 		private boolean fire;
 		private boolean important;
-		private boolean play;
+		private String progress;
 
 		public SubTask(Task task) {
 			this.title = task.getTitle();
 			this.desc = task.getDesc();
 			this.fire = task.isFire();
 			this.important = task.isImportant();
-			this.play = task.isPlay();
+			this.progress = task.getProgress();
 		}
 
 		/**
-		 * @return the play
+		 * @return the progress
 		 */
-		public boolean isPlay() {
-			return play;
+		public String getProgress() {
+			return progress;
 		}
 
 		/**

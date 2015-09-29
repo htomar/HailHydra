@@ -16,7 +16,6 @@ public class Task {
 	private boolean fire;
 	private boolean important;
 	private String progress;
-	private boolean play;
 	private List<Task> subTasks;
 
 	/**
@@ -95,21 +94,6 @@ public class Task {
 	}
 
 	/**
-	 * @return the play
-	 */
-	public boolean isPlay() {
-		return play;
-	}
-
-	/**
-	 * @param play
-	 *            the play to set
-	 */
-	public void setPlay(boolean play) {
-		this.play = play;
-	}
-
-	/**
 	 * @return the subTasks
 	 */
 	public List<Task> getSubTasks() {
@@ -148,8 +132,8 @@ public class Task {
 	public String toString() {
 		return "Task [id=" + id + ", userId=" + userId + ", title=" + title
 				+ ", desc=" + desc + ", fire=" + fire + ", important="
-				+ important + ", progress=" + progress + ", play=" + play
-				+ ", subTasks=" + subTasks + "]";
+				+ important + ", progress=" + progress + ", subTasks="
+				+ subTasks + "]";
 	}
 
 	/**

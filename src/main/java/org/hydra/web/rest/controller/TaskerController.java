@@ -52,14 +52,14 @@ public class TaskerController {
 		subTask1.setDesc("Description of subtask1");
 		subTask1.setFire(false);
 		subTask1.setImportant(false);
-		subTask1.setPlay(false);
+		subTask1.setProgress("pause");
 		Task subTask2 = new Task();
 		subTask2.setId(ObjectId.get());
 		subTask2.setTitle("Validation Proxy 2");
 		subTask2.setDesc("Description of subtask2");
 		subTask2.setFire(false);
 		subTask2.setImportant(false);
-		subTask2.setPlay(false);
+		subTask2.setProgress("pause");
 		List<Task> subTasks1 = new ArrayList<Task>();
 		subTasks1.add(subTask1);
 		subTasks1.add(subTask2);
