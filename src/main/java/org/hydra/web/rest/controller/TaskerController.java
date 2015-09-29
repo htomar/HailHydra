@@ -7,8 +7,10 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import org.hydra.tasker.db.beans.Task;
 import org.hydra.tasker.db.repository.TaskRepository;
+import org.hydra.web.rest.beans.TaskProgress;
 import org.hydra.web.rest.response.json.MyTasksJson;
 import org.hydra.web.rest.response.json.SubTaskJson;
+import org.hydra.web.rest.response.json.TaskJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,28 +40,40 @@ public class TaskerController {
 		return subTasks;
 	}
 
-	public @RequestMapping("/createTask") void createTask() {
+	public @RequestMapping("/createNewTask") TaskJson createTask() {
+		Task task = new Task();
+		task.setTitle("New Task");
+		task.setDesc("New Task");
+		task.setUserId("sunil");
+		task.setProgress(TaskProgress.STOP);
+		taskRepository.save(task);
+		TaskJson taskJson = new TaskJson();
+		taskJson.addTask(task);
+		return taskJson;
+	}
+
+	public @RequestMapping("/createDummyTask") void createDummyTask() {
 		Task task1 = new Task();
 		task1.setUserId("sunil");
 		task1.setTitle("Validation Proxy Session");
 		task1.setDesc("Description of task1");
 		task1.setFire(false);
 		task1.setImportant(false);
-		task1.setProgress("pause");
+		task1.setProgress(TaskProgress.PAUSE);
 		Task subTask1 = new Task();
 		subTask1.setId(ObjectId.get());
 		subTask1.setTitle("Validation Proxy 1");
 		subTask1.setDesc("Description of subtask1");
 		subTask1.setFire(false);
 		subTask1.setImportant(false);
-		subTask1.setProgress("pause");
+		subTask1.setProgress(TaskProgress.PAUSE);
 		Task subTask2 = new Task();
 		subTask2.setId(ObjectId.get());
 		subTask2.setTitle("Validation Proxy 2");
 		subTask2.setDesc("Description of subtask2");
 		subTask2.setFire(false);
 		subTask2.setImportant(false);
-		subTask2.setProgress("pause");
+		subTask2.setProgress(TaskProgress.PAUSE);
 		List<Task> subTasks1 = new ArrayList<Task>();
 		subTasks1.add(subTask1);
 		subTasks1.add(subTask2);
@@ -72,7 +86,7 @@ public class TaskerController {
 		task2.setDesc("Description of task2");
 		task2.setFire(true);
 		task2.setImportant(true);
-		task2.setProgress("pause");
+		task2.setProgress(TaskProgress.PAUSE);
 		taskRepository.save(task2);
 	}
 }

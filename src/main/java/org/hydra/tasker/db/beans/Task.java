@@ -3,6 +3,7 @@ package org.hydra.tasker.db.beans;
 import java.util.List;
 
 import org.bson.types.ObjectId;
+import org.hydra.web.rest.beans.TaskProgress;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -149,5 +150,9 @@ public class Task {
 	 */
 	public void setId(ObjectId id) {
 		this.id = id;
+	}
+
+	public void setProgress(TaskProgress taskProgress) {
+		this.progress = taskProgress.getProgress();
 	}
 }
