@@ -15,6 +15,10 @@ public class BaseJsonResponse {
 		private ResponseStatus(String responseStatus) {
 			this.responseStatus = responseStatus;
 		}
+
+		public String getStatus() {
+			return this.responseStatus;
+		}
 	}
 
 	public BaseJsonResponse() {

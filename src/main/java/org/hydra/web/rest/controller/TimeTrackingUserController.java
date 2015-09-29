@@ -10,6 +10,7 @@ import org.hydra.timetrack.db.repository.TimeTrackUsersRepository;
 import org.hydra.web.rest.response.json.BaseJsonResponse;
 import org.hydra.web.rest.response.json.TimeTrackingUsersJson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +35,6 @@ public class TimeTrackingUserController {
 		timeTrackUsersRepository.save(newUser);
 		Iterable<TimeTrackUsers> users = timeTrackUsersRepository.findAll();
 		for (TimeTrackUsers user : users) {
-			System.out.println(user.getFirstName());
 			usersList.add(user);
 		}
 		return usersList;
@@ -56,7 +56,7 @@ public class TimeTrackingUserController {
 			@RequestParam(value = "effort", required = true) long effort) {
 		BaseJsonResponse jsonResponse = new BaseJsonResponse(
 				BaseJsonResponse.ResponseStatus.OK);
-		if (null == email) {
+		if (StringUtils.isEmpty(email)) {
 			jsonResponse.setStatus(BaseJsonResponse.ResponseStatus.ERROR);
 			jsonResponse.setMessage(BaseJsonResponse.DEFAULT_ERROR_MSG);
 		} else {

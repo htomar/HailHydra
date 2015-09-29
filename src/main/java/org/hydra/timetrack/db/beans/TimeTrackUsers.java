@@ -86,4 +86,10 @@ public class TimeTrackUsers {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	@Override
+	public String toString() {
+		return "TimeTrackUsers [id=" + id + ", email=" + email + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", team=" + team + "]";
+	}
 }
