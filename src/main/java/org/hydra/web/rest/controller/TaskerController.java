@@ -11,6 +11,9 @@ import org.hydra.web.rest.beans.TaskProgress;
 import org.hydra.web.rest.response.json.MyTasksJson;
 import org.hydra.web.rest.response.json.SubTaskJson;
 import org.hydra.web.rest.response.json.TaskJson;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +52,43 @@ public class TaskerController {
 		taskRepository.save(task);
 		TaskJson taskJson = new TaskJson();
 		taskJson.addTask(task);
+		return taskJson;
+	}
+
+	public @RequestMapping("/createNewSubTask") TaskJson createSubTask(
+			@RequestParam(value = "taskId", required = true) String taskId) {
+		Task task = taskRepository.findById(new ObjectId(taskId));
+		TaskJson taskJson = new TaskJson();
+		if (null != task) {
+			if (null == task.getSubTasks()) {
+				task.setSubTasks(new ArrayList<Task>());
+			}
+			Task subTask = new Task();
+			subTask.setId(ObjectId.get());
+			subTask.setTitle("New Sub Task");
+			subTask.setDesc("New Sub Task");
+			subTask.setProgress(TaskProgress.STOP);
+			task.getSubTasks().add(subTask);
+			taskRepository.save(task);
+			taskJson.addTask(subTask);
+		}
+		return taskJson;
+	}
+
+	public @RequestMapping("/updateTask") TaskJson updateTask(
+			@RequestParam(value = "taskId", required = true) String taskId,
+			@RequestParam(value = "key", required = true) String key,
+			@RequestParam(value = "value", required = true) String value) {
+		Task task = taskRepository.findById(new ObjectId(taskId));
+		TaskJson taskJson = new TaskJson();
+		if (null != task) {
+			PropertyValue propertyValue = new PropertyValue(key, value);
+			BeanWrapper beanWrapper = new BeanWrapperImpl(task);
+			beanWrapper.setPropertyValue(propertyValue);
+			System.out.println(task);
+			taskRepository.save(task);
+			taskJson.addTask(task);
+		}
 		return taskJson;
 	}
 
