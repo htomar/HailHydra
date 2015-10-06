@@ -3,8 +3,12 @@ package org.hydra.web.rest.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
+
+import javax.servlet.http.HttpSession;
 
 import org.bson.types.ObjectId;
+import org.hydra.tasker.db.beans.SubTask;
 import org.hydra.tasker.db.beans.Task;
 import org.hydra.tasker.db.repository.TaskRepository;
 import org.hydra.web.rest.beans.TaskProgress;
@@ -22,12 +26,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/tasker")
 public class TaskerController {
+	Logger logger = Logger.getLogger(TaskerController.class.getName());
+
 	private @Autowired TaskRepository taskRepository;
 
-	public @RequestMapping("/getTasks") MyTasksJson getTasks() {
+	public @RequestMapping("/getTasks") MyTasksJson getTasks(HttpSession session) {
 		List<Task> tasks = taskRepository.findByUserId("sunil");
 		MyTasksJson myTasksJson = new MyTasksJson();
 		myTasksJson.addActiveTasks(tasks);
+		if (null != session) {
+			if (null != session.getAttribute("Mine")) {
+				logger.info("Mine is " + session.getAttribute("Mine"));
+			} else {
+				session.setAttribute("Mine", System.currentTimeMillis());
+				logger.info("Mine is " + session.getAttribute("Mine"));
+			}
+		} else {
+			logger.info("No Session :(");
+		}
 		return myTasksJson;
 	}
 
@@ -37,7 +53,7 @@ public class TaskerController {
 		HashMap<String, SubTaskJson> subTasks = new HashMap<String, SubTaskJson>();
 		if (null != task) {
 			SubTaskJson subTaskJson = new SubTaskJson();
-			subTaskJson.addTasks(task.getSubTasks());
+			subTaskJson.addSubTasks(task.getSubTasks());
 			subTasks.put(taskId, subTaskJson);
 		}
 		return subTasks;
@@ -55,24 +71,29 @@ public class TaskerController {
 		return taskJson;
 	}
 
-	public @RequestMapping("/createNewSubTask") TaskJson createSubTask(
+	public @RequestMapping("/createNewSubTask") SubTaskJson createSubTask(
 			@RequestParam(value = "taskId", required = true) String taskId) {
-		Task task = taskRepository.findById(new ObjectId(taskId));
-		TaskJson taskJson = new TaskJson();
-		if (null != task) {
-			if (null == task.getSubTasks()) {
-				task.setSubTasks(new ArrayList<Task>());
+		SubTaskJson subTaskJson = new SubTaskJson();
+		try {
+			Task task = taskRepository.findById(new ObjectId(taskId));
+
+			if (null != task) {
+				if (null == task.getSubTasks()) {
+					task.setSubTasks(new ArrayList<SubTask>());
+				}
+				SubTask subTask = new SubTask();
+				subTask.setId(ObjectId.get());
+				subTask.setTitle("New Sub Task");
+				subTask.setDesc("New Sub Task");
+				subTask.setProgress(TaskProgress.STOP);
+				task.getSubTasks().add(subTask);
+				taskRepository.save(task);
+				subTaskJson.addSubTask(subTask);
 			}
-			Task subTask = new Task();
-			subTask.setId(ObjectId.get());
-			subTask.setTitle("New Sub Task");
-			subTask.setDesc("New Sub Task");
-			subTask.setProgress(TaskProgress.STOP);
-			task.getSubTasks().add(subTask);
-			taskRepository.save(task);
-			taskJson.addTask(subTask);
+		} catch (IllegalArgumentException argumentException) {
+			logger.severe("Incorrect Task Id: " + taskId);
 		}
-		return taskJson;
+		return subTaskJson;
 	}
 
 	public @RequestMapping("/updateTask") TaskJson updateTask(
@@ -100,21 +121,21 @@ public class TaskerController {
 		task1.setFire(false);
 		task1.setImportant(false);
 		task1.setProgress(TaskProgress.PAUSE);
-		Task subTask1 = new Task();
+		SubTask subTask1 = new SubTask();
 		subTask1.setId(ObjectId.get());
 		subTask1.setTitle("Validation Proxy 1");
 		subTask1.setDesc("Description of subtask1");
 		subTask1.setFire(false);
 		subTask1.setImportant(false);
 		subTask1.setProgress(TaskProgress.PAUSE);
-		Task subTask2 = new Task();
+		SubTask subTask2 = new SubTask();
 		subTask2.setId(ObjectId.get());
 		subTask2.setTitle("Validation Proxy 2");
 		subTask2.setDesc("Description of subtask2");
 		subTask2.setFire(false);
 		subTask2.setImportant(false);
 		subTask2.setProgress(TaskProgress.PAUSE);
-		List<Task> subTasks1 = new ArrayList<Task>();
+		List<SubTask> subTasks1 = new ArrayList<SubTask>();
 		subTasks1.add(subTask1);
 		subTasks1.add(subTask2);
 		task1.setSubTasks(subTasks1);

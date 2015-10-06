@@ -3,110 +3,29 @@ package org.hydra.tasker.db.beans;
 import java.util.List;
 
 import org.bson.types.ObjectId;
-import org.hydra.web.rest.beans.TaskProgress;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "task")
-public class Task {
+public class Task extends BaseTask {
 	@Id
 	private ObjectId id;
 	private String userId;
-	private String title;
-	private String desc;
-	private boolean fire;
-	private boolean important;
-	private String progress;
-	private List<Task> subTasks;
+	private List<SubTask> subTasks;
 
 	/**
-	 * @return the title
+	 * @return the id
 	 */
-	public String getTitle() {
-		return title;
+	public ObjectId getId() {
+		return id;
 	}
 
 	/**
-	 * @param title
-	 *            the title to set
+	 * @param id
+	 *            the id to set
 	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	/**
-	 * @return the desc
-	 */
-	public String getDesc() {
-		return desc;
-	}
-
-	/**
-	 * @param desc
-	 *            the desc to set
-	 */
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-
-	/**
-	 * @return the fire
-	 */
-	public boolean isFire() {
-		return fire;
-	}
-
-	/**
-	 * @param fire
-	 *            the fire to set
-	 */
-	public void setFire(boolean fire) {
-		this.fire = fire;
-	}
-
-	/**
-	 * @return the important
-	 */
-	public boolean isImportant() {
-		return important;
-	}
-
-	/**
-	 * @param important
-	 *            the important to set
-	 */
-	public void setImportant(boolean important) {
-		this.important = important;
-	}
-
-	/**
-	 * @return the progress
-	 */
-	public String getProgress() {
-		return progress;
-	}
-
-	/**
-	 * @param progress
-	 *            the progress to set
-	 */
-	public void setProgress(String progress) {
-		this.progress = progress;
-	}
-
-	/**
-	 * @return the subTasks
-	 */
-	public List<Task> getSubTasks() {
-		return subTasks;
-	}
-
-	/**
-	 * @param subTasks
-	 *            the subTasks to set
-	 */
-	public void setSubTasks(List<Task> subTasks) {
-		this.subTasks = subTasks;
+	public void setId(ObjectId id) {
+		this.id = id;
 	}
 
 	/**
@@ -124,35 +43,18 @@ public class Task {
 		this.userId = userId;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
+	/**
+	 * @return the subTasks
 	 */
-	@Override
-	public String toString() {
-		return "Task [id=" + id + ", userId=" + userId + ", title=" + title
-				+ ", desc=" + desc + ", fire=" + fire + ", important="
-				+ important + ", progress=" + progress + ", subTasks="
-				+ subTasks + "]";
+	public List<SubTask> getSubTasks() {
+		return subTasks;
 	}
 
 	/**
-	 * @return the id
+	 * @param subTasks
+	 *            the subTasks to set
 	 */
-	public ObjectId getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
-
-	public void setProgress(TaskProgress taskProgress) {
-		this.progress = taskProgress.getProgress();
+	public void setSubTasks(List<SubTask> subTasks) {
+		this.subTasks = subTasks;
 	}
 }

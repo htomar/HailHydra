@@ -4,61 +4,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hydra.tasker.db.beans.BaseTask;
+import org.springframework.beans.BeanUtils;
+
 public class TaskJson {
-	public class Task {
-		private String title;
-		private String desc;
-		private boolean fire;
-		private boolean important;
-		private String progress;
+	public class Task extends BaseTask {
 		private String subTasks;
 
 		public Task(org.hydra.tasker.db.beans.Task task) {
-			this.title = task.getTitle();
-			this.desc = task.getDesc();
-			this.fire = task.isFire();
-			this.important = task.isImportant();
-			this.progress = task.getProgress();
 			this.subTasks = "";
+			BeanUtils.copyProperties(task, this);
 			if (null != task.getSubTasks() && !task.getSubTasks().isEmpty()) {
 				this.subTasks = "/getSubTasks?taskId="
 						+ task.getId().toHexString();
 			}
-		}
-
-		/**
-		 * @return the title
-		 */
-		public String getTitle() {
-			return title;
-		}
-
-		/**
-		 * @return the desc
-		 */
-		public String getDesc() {
-			return desc;
-		}
-
-		/**
-		 * @return the fire
-		 */
-		public boolean isFire() {
-			return fire;
-		}
-
-		/**
-		 * @return the important
-		 */
-		public boolean isImportant() {
-			return important;
-		}
-
-		/**
-		 * @return the progress
-		 */
-		public String getProgress() {
-			return progress;
 		}
 
 		/**

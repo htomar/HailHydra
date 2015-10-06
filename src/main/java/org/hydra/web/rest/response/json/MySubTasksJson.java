@@ -3,7 +3,7 @@ package org.hydra.web.rest.response.json;
 import java.util.HashMap;
 import java.util.List;
 
-import org.hydra.tasker.db.beans.Task;
+import org.hydra.tasker.db.beans.SubTask;
 
 public class MySubTasksJson {
 	/**
@@ -19,9 +19,9 @@ public class MySubTasksJson {
 		subTasks = new HashMap<String, SubTaskJson>();
 	}
 
-	public void addSubTasks(String taskId, List<Task> activeTasks) {
+	public void addSubTasks(String taskId, List<SubTask> activeTasks) {
 		SubTaskJson subTaskJson = new SubTaskJson();
-		subTaskJson.addTasks(activeTasks);
+		subTaskJson.addSubTasks(activeTasks);
 		subTasks.put(taskId, subTaskJson);
 	}
 }

@@ -4,76 +4,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hydra.tasker.db.beans.Task;
+import org.hydra.tasker.db.beans.BaseTask;
+import org.hydra.tasker.db.beans.SubTask;
+import org.springframework.beans.BeanUtils;
 
 public class SubTaskJson {
-	public class SubTask {
-		private String title;
-		private String desc;
-		private boolean fire;
-		private boolean important;
-		private String progress;
-
-		public SubTask(Task task) {
-			this.title = task.getTitle();
-			this.desc = task.getDesc();
-			this.fire = task.isFire();
-			this.important = task.isImportant();
-			this.progress = task.getProgress();
-		}
-
-		/**
-		 * @return the progress
-		 */
-		public String getProgress() {
-			return progress;
-		}
-
-		/**
-		 * @return the title
-		 */
-		public String getTitle() {
-			return title;
-		}
-
-		/**
-		 * @return the desc
-		 */
-		public String getDesc() {
-			return desc;
-		}
-
-		/**
-		 * @return the fire
-		 */
-		public boolean isFire() {
-			return fire;
-		}
-
-		/**
-		 * @return the important
-		 */
-		public boolean isImportant() {
-			return important;
-		}
-	}
-
-	private Map<String, SubTask> subTasks;
+	private Map<String, BaseTask> subTasks;
 
 	public SubTaskJson() {
-		subTasks = new HashMap<String, SubTask>();
+		subTasks = new HashMap<String, BaseTask>();
 	}
 
-	public void addTask(Task task) {
-		if (null != task) {
-			subTasks.put(task.getId().toHexString(), new SubTask(task));
+	public void addSubTask(SubTask subTask) {
+		if (null != subTask) {
+			BaseTask baseTask = new BaseTask();
+			BeanUtils.copyProperties(subTask, baseTask);
+			subTasks.put(subTask.getId().toHexString(), baseTask);
 		}
 	}
 
-	public void addTasks(List<Task> activeTasks) {
-		if (null != activeTasks && !activeTasks.isEmpty()) {
-			for (Task task : activeTasks) {
-				addTask(task);
+	public void addSubTasks(List<SubTask> subTasks) {
+		if (null != subTasks && !subTasks.isEmpty()) {
+			for (SubTask subTask : subTasks) {
+				addSubTask(subTask);
 			}
 		}
 	}
@@ -81,7 +34,7 @@ public class SubTaskJson {
 	/**
 	 * @return the subTasks
 	 */
-	public Map<String, SubTask> getSubTasks() {
+	public Map<String, BaseTask> getSubTasks() {
 		return subTasks;
 	}
 }
