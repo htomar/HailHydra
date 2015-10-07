@@ -17,6 +17,7 @@ import org.hydra.web.rest.response.json.SubTaskJson;
 import org.hydra.web.rest.response.json.TaskJson;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.NotWritablePropertyException;
 import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,27 +35,21 @@ public class TaskerController {
 		List<Task> tasks = taskRepository.findByUserId("sunil");
 		MyTasksJson myTasksJson = new MyTasksJson();
 		myTasksJson.addActiveTasks(tasks);
-		if (null != session) {
-			if (null != session.getAttribute("Mine")) {
-				logger.info("Mine is " + session.getAttribute("Mine"));
-			} else {
-				session.setAttribute("Mine", System.currentTimeMillis());
-				logger.info("Mine is " + session.getAttribute("Mine"));
-			}
-		} else {
-			logger.info("No Session :(");
-		}
 		return myTasksJson;
 	}
 
 	public @RequestMapping("/getSubTasks") HashMap<String, SubTaskJson> getSubTasks(
 			@RequestParam(value = "taskId", required = true) String taskId) {
-		Task task = taskRepository.findById(new ObjectId(taskId));
 		HashMap<String, SubTaskJson> subTasks = new HashMap<String, SubTaskJson>();
-		if (null != task) {
-			SubTaskJson subTaskJson = new SubTaskJson();
-			subTaskJson.addSubTasks(task.getSubTasks());
-			subTasks.put(taskId, subTaskJson);
+		try {
+			Task task = taskRepository.findById(new ObjectId(taskId));
+			if (null != task) {
+				SubTaskJson subTaskJson = new SubTaskJson();
+				subTaskJson.addSubTasks(task.getSubTasks());
+				subTasks.put(taskId, subTaskJson);
+			}
+		} catch (IllegalArgumentException exception) {
+			logger.severe("Incorrect Task Id: " + taskId);
 		}
 		return subTasks;
 	}
@@ -100,54 +95,21 @@ public class TaskerController {
 			@RequestParam(value = "taskId", required = true) String taskId,
 			@RequestParam(value = "key", required = true) String key,
 			@RequestParam(value = "value", required = true) String value) {
-		Task task = taskRepository.findById(new ObjectId(taskId));
+
 		TaskJson taskJson = new TaskJson();
-		if (null != task) {
-			PropertyValue propertyValue = new PropertyValue(key, value);
-			BeanWrapper beanWrapper = new BeanWrapperImpl(task);
-			beanWrapper.setPropertyValue(propertyValue);
-			System.out.println(task);
-			taskRepository.save(task);
-			taskJson.addTask(task);
+		try {
+			Task task = taskRepository.findById(new ObjectId(taskId));
+			if (null != task) {
+				PropertyValue propertyValue = new PropertyValue(key, value);
+				BeanWrapper beanWrapper = new BeanWrapperImpl(task);
+				beanWrapper.setPropertyValue(propertyValue);
+				System.out.println(task);
+				taskRepository.save(task);
+				taskJson.addTask(task);
+			}
+		} catch (IllegalArgumentException | NotWritablePropertyException exception) {
+			logger.severe("Incorrect Task Id: " + taskId);
 		}
 		return taskJson;
-	}
-
-	public @RequestMapping("/createDummyTask") void createDummyTask() {
-		Task task1 = new Task();
-		task1.setUserId("sunil");
-		task1.setTitle("Validation Proxy Session");
-		task1.setDesc("Description of task1");
-		task1.setFire(false);
-		task1.setImportant(false);
-		task1.setProgress(TaskProgress.PAUSE);
-		SubTask subTask1 = new SubTask();
-		subTask1.setId(ObjectId.get());
-		subTask1.setTitle("Validation Proxy 1");
-		subTask1.setDesc("Description of subtask1");
-		subTask1.setFire(false);
-		subTask1.setImportant(false);
-		subTask1.setProgress(TaskProgress.PAUSE);
-		SubTask subTask2 = new SubTask();
-		subTask2.setId(ObjectId.get());
-		subTask2.setTitle("Validation Proxy 2");
-		subTask2.setDesc("Description of subtask2");
-		subTask2.setFire(false);
-		subTask2.setImportant(false);
-		subTask2.setProgress(TaskProgress.PAUSE);
-		List<SubTask> subTasks1 = new ArrayList<SubTask>();
-		subTasks1.add(subTask1);
-		subTasks1.add(subTask2);
-		task1.setSubTasks(subTasks1);
-		taskRepository.save(task1);
-
-		Task task2 = new Task();
-		task2.setUserId("sunil");
-		task2.setTitle("Sitespeed session for team");
-		task2.setDesc("Description of task2");
-		task2.setFire(true);
-		task2.setImportant(true);
-		task2.setProgress(TaskProgress.PAUSE);
-		taskRepository.save(task2);
 	}
 }
