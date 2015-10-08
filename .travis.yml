@@ -26,7 +26,7 @@ deploy:
   - provider: S3
     access_key_id: "AKIAI5IJY47YQZ2LYMMA"
     secret_access_key: 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
-    bucket: "S3 Bucket"
+    bucket: "elasticbeanstalk-us-east-1-098791417268"
     skip_cleanup: true
 after_success:
   - mvn -X test clean jacoco:report coveralls:report
