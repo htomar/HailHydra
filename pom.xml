@@ -70,7 +70,7 @@
 				<configuration>
 					<argLine>${argLine}</argLine>
 					<!-- Skips unit tests if the value of skip.unit.tests property is true -->
-					<skipTests>${skip.unit.tests}</skipTests>
+					<skipTests>${skipTests}</skipTests>
 				</configuration>
 
 			</plugin>
