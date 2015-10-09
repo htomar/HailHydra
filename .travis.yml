@@ -23,10 +23,5 @@ deploy:
       secure: Oqd5n4mxHNNPYVD/htHCoNOJ5Tkb+P6bLsW2mpcof0+T7HEZtUo9Jty+FW91JsBh0etNQyZmTRxnrVvECir58/DbIJZFYF8wzl2uJ+g+MZTuOkk599rbm8nUgA1FbRMLCsCJvAC0Rg+OxsYM1ITS/flNsxXaEH9DnnYzDEqM3y4AX7Km8LcYEboebij3gxv0OOhWyHXOriBxoOp5GFqQfHEQvxTrfi/7jhj15mHvt8ofDaHOBeo9mD0IwlL0NhMdVz8lVIqe0d2BaVDiGejtdlYIWuEzkT2f/DQXZgkjAvLFW2IGPuMrHvJUf2glrIvCq29UKX5ZXiW4EJXz4ZKn3XotlEXHkzAGPznX6i4BYGPuKnT265Uu4IgALtuRC8MnCQ+G2LYM4JOULDz93LI2gEJVxsLa/OMibRhmA4NdvFZWvyJNw2o/rP5WwyTG7Y6wczonqh1klkLJIiCwr1CR8uwXD4cDWOiBIDZ7kiO1d1lrl8mJbyEuQwmCVIbWfWz3cOSkvFp7OsT7v8W+KkwLdL5cnmepQ2rlKSGQRu95N0Qw/Ff/oX8ea3jnIPbvsszRyYnWT8F6RPM4QmmXvWaoyLxigc0zdPWxC6LMd3bdaMH+p2WDYQ1/S3X1vsLNvkKX3oAdYof3BQS8a8o2GkoE3O7I6SpAOyeB+iIWxNu5GEU=
     app: hailhydra
     on: master
-  - provider: S3
-    access_key_id: "AKIAI5IJY47YQZ2LYMMA"
-    secret_access_key: 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
-    bucket: "elasticbeanstalk-us-east-1-098791417268"
-    skip_cleanup: true
 after_success:
   - mvn -X test clean jacoco:report coveralls:report
